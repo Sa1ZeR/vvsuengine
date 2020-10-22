@@ -13,18 +13,18 @@
 	</hgroup>
 	<nav id=global>
 		<ul>
-			<li><a href=#>Home</a></li>
-			<li><a href=#>About</a></li>
+			<li><a href="/">Home</a></li>
+			<li><a href="?page=about">About</a></li>
 			<li id=services>
-				<a href=#>Services</a>
+				<a href="/">Services</a>
 				<ul id=subMenu>
-					<li><a href=#>Whatever</a></li>
-					<li><a href=#>Your Heart</a></li>
-					<li><a href=#>Desires</a></li>
+					<li><a href="?page=whatever">Whatever</a></li>
+					<li><a href="?page=yourheart">Your Heart</a></li>
+					<li><a href="?page=desires">Desires</a></li>
 				</ul>
 			</li>
-			<li><a href=#>Portfolio</a></li>
-			<li><a href=#>Contact</a></li>
+			<li><a href="?page=profile">Portfolio</a></li>
+			<li><a href="?page=contacts">Contacts</a></li>
 		</ul>
 	</nav>
 </header>
@@ -32,34 +32,11 @@
 <div class=clearfix>
 	<div id=content>
 	
-		<? echo $data ?>
+		<? echo $data['content'] ?>
 		
 	</div>
 	
-	<aside>
-		<section>
-			<h1>Stay in Touch</h1>
-			<ul id=inTouch>
-				<li><span class=twitter>12345</span> <a href=#>Twitter</a> followers</li>
-				<li><span class=rss>4321</span> <a href=#>RSS feed</a> subscribers</li>
-			</ul>
-		</section>
-		
-		<nav>
-			<h1>Blogroll</h1>
-			<ul class=links>
-				<li><a href=#>A List of</a></li>
-				<li><a href=#>Friendly Blogs</a></li>
-				<li><a href=#>That have Exchanged</a></li>
-				<li><a href=#>Links with Us</a></li>
-			</ul>
-		</nav>
-		
-		<section>
-			<blockquote>It's as cunning as a fox that used to be the Professor of Cunning at Oxford University</blockquote>
-			<a class=twitterHandle href=#>@TheBlackAdder</a>
-		</section>
-	</aside>
+	<? echo $data['l_blocks'] ?>
 </div>
 
 <footer class=clearfix>

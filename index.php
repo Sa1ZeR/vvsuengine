@@ -15,5 +15,10 @@ switch ($page) {
 
 }
 
-echo $core->dataConnect(VVSU_STYLE_PATH.'index.html', $content);
+$dataGlobal = array(
+    "content" => $content,
+    "l_blocks" => $core->dataConnect(VVSU_STYLE_PATH."blocks/menu.html")
+);
+
+echo $core->dataConnect(VVSU_STYLE_PATH.'index.html', $dataGlobal);
 ?>
