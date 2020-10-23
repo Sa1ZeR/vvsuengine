@@ -188,11 +188,47 @@ nav#global ul li #subMenu li a {
 	float: left;
 }
 
+input {
+	padding: 5px;
+	border: solid 1px #b6b1b1;
+	border-radius: 7px;
+}
+
+button {
+	padding: 9px;
+	color: white;
+	background-color: #007aa3;
+	border-radius: 50px;
+	cursor: pointer;
+}
+
+button:hover {
+	background-color: #058cba;
+	transform: scale(1.07);
+}
+
+select {
+	padding: 5px;
+	border: solid 1px #b6b1b1;
+	border-radius: 7px;
+}
+
 .page-block {
-    background-color: #eae8d9;
-    border-radius: 15px;
-    box-shadow: 0 0 10px #629996;
-    padding: 15px;
+	background-color: #eae8d9;
+	border-radius: 15px;
+	box-shadow: 0 0 10px #629996;
+	padding: 15px;
+}
+
+.block-title {
+	font-size: 31px;
+	text-align: center;
+	font-weight: 700;
+	padding-bottom: 10px;
+}
+
+.control-group {
+	padding: 7px;
 }
 
 article {

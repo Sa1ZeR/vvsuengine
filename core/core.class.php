@@ -3,11 +3,9 @@
 
 class core
 {
-    private $core;
 
-    public function __construct($core)
+    public function __construct()
     {
-        $core = $core;
     }
 
     public function loadModule($page) {
