@@ -8,6 +8,7 @@ $page = isset($_GET['page']) ? $_GET['page'] : "mainpage";
 $content;
 switch ($page) {
     case "mainpage":
+        $content = $core->loadModule("post");
         break;
     default:
         $content = $core->loadModule($page);

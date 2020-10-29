@@ -25,6 +25,10 @@ class db
         if(!$this->obj->set_charset("utf8")){ return false; }
     }
 
+    public function num_rows($query=false){
+        return $this->result->num_rows;
+    }
+
     public function safesql($str) {
         return $this->obj->real_escape_string($str);
     }
@@ -33,5 +37,17 @@ class db
         $this->result = @$this->obj->query($string);
 
         return $this->result;
+    }
+
+    public function fetch_array($query=false){
+        return $this->result->fetch_array();
+    }
+
+    public function fetch_assoc($query=false){
+        return $this->result->fetch_assoc();
+    }
+
+    public function HSC($string=''){
+        return htmlspecialchars($string);
     }
 }

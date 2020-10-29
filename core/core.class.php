@@ -36,8 +36,4 @@ class core
 
         return ob_get_clean();
     }
-
-    public function num_rows($query=false){
-        return $this->result->num_rows;
-    }
 }

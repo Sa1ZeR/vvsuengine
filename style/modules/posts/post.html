@@ -1,0 +1,18 @@
+<? foreach ($data as $post): ?>
+<article>
+    <header>
+        <div class=time>
+            <div class=year><? echo $post['year'] ?></div>
+            <div class=date><? echo $post['day'] ?><span><? echo $post['month'] ?></span></div>
+        </div>
+        <h1><? echo $post['title'] ?></h1>
+        <div class=comments><? echo $post['id'] ?></div>
+    </header>
+    <p><? echo $post['text'] ?></p>
+    <footer>
+        <em>Written by:</em> <strong>Author Name</strong>
+        <span class=newLine><em>Tags:</em> <a class=tags href=#>cool</a><a class=tags href=#>modern</a><a class=tags href=#>hype-friendly</a></span>
+        <a class=button href=#>Continue Reading</a>
+    </footer>
+</article>
+<? endforeach ?>
