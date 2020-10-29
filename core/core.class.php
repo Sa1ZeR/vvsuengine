@@ -4,8 +4,12 @@
 class core
 {
 
+    public $db;
+
     public function __construct()
     {
+        require_once (VVSU_CORE_PATH."db.class.php");
+        $this->db = new db($this);
     }
 
     public function loadModule($page) {
@@ -31,5 +35,9 @@ class core
         include($path);
 
         return ob_get_clean();
+    }
+
+    public function num_rows($query=false){
+        return $this->result->num_rows;
     }
 }
