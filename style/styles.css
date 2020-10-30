@@ -220,6 +220,35 @@ select {
 	padding: 15px;
 }
 
+.page-navigator {
+	background-color: #eae8d9;
+	border-radius: 15px;
+	box-shadow: 0 0 10px #629996;
+	padding: 17px;
+	margin-bottom: 15px;
+}
+
+ul.navigation >li {
+	display: inline;
+	padding: 10px;
+	border-radius: 9px;
+	background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0, #ca0000),color-stop(1, #970000));
+	text-decoration: none;
+	list-style-type: none;
+}
+
+ul.navigation >li > a {
+	color: white;
+	padding: 11px;
+	font-size: 17px;
+	text-decoration: none;
+}
+
+ul.navigation >li:hover {
+	background-image: -moz-linear-gradient(bottom, #ca0000, #970000);
+	background-image: -webkit-gradient(linear,left bottom,left top,color-stop(0, #ca0000),color-stop(1, #970000));
+}
+
 .block-title {
 	font-size: 31px;
 	text-align: center;

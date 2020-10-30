@@ -1,4 +1,4 @@
-<? foreach ($data as $post): ?>
+<? foreach ($data['posts'] as $post): ?>
 <article>
     <header>
         <div class=time>
@@ -16,3 +16,4 @@
     </footer>
 </article>
 <? endforeach ?>
+<? echo $data['pagination'] ?>
