@@ -29,19 +29,48 @@ class module
         return $monthsList[$month];
     }
 
+    private function getTags($id) {
+        $id = intval($id);
+        $query = $this->db->query("SELECT * from vvsu_tags WHERE id IN (SELECT tid from vvsu_post_to_tag WHERE pid = $id)");
+
+        $tags = [];
+
+        if(!$query || $this->db->num_rows($query) <= 0) {
+            return $tags;
+        }
+
+        while ($arr = $this->db->fetch_assoc($query)) {
+            $tags[] = $this->db->HSC($arr['title']);
+        }
+
+        return $tags;
+    }
+
     private function getPosts($query) {
         $data = [];
         while($arr = $this->db->fetch_assoc($query)) {
             $date  =  DateTime::createFromFormat('Y-m-d', $this->db->HSC($arr['date']));
-            $data[] = [
+            $data[intval($arr['id'])] = [
                 'id' => intval($arr['id']),
                 'title' => $this->db->HSC($arr['title']),
-                'text' => $this->db->HSC($arr['text']),
+                'text' => $this->db->HSC($arr['short_text']),
                 'year' => $this->db->HSC($date->format("Y")),
                 'month' => $this->db->HSC($this->dateConvert($date->format("m"))),
-                'day' => $this->db->HSC($date->format("d"))
+                'day' => $this->db->HSC($date->format("d")),
+                'tid' => intval($arr['tid']),
+                'tags' => [],
+                'author' => $this->db->HSC($arr['login']),
             ];
         }
+
+        //Так делать нельзя, никогда
+        //ЛЮТЫЙ КОСТЫЛЬ ОСТОРОЖНО!!! DANGER!!!!
+        foreach ($data as $key => $value) {
+            $data[$key]['tags'] = $this->getTags($key);
+        }
+
+
+
         return $data;
     }
 
@@ -53,11 +82,18 @@ class module
         }
 
         if($curPage >= 3) {
-            $pageArray[0] = $curPage - 2;
-            $pageArray[1] = $curPage - 1;
-            $pageArray[2] = $curPage;
-            $pageArray[3] = $curPage + 1;
-            $pageArray[4] = $curPage + 2;
+            $index =0;
+            if($curPage + 2 >= $maxPage) {
+                for($i = $curPage - 2; $i <= $maxPage;$i++) {
+                    $pageArray[$index] = $i;
+                    $index++;
+                }
+            } else {
+                for($i = $curPage - 2; $i <= $curPage + 2; $i++) {
+                    $pageArray[$index] = $i;
+                    $index++;
+                }
+            }
         } else {
             if($maxPage > 5) {
                 for ($i = 0; $i < 5; $i++) {
@@ -87,7 +123,8 @@ class module
         $curPost = $curPage * $this->pageResult - $this->pageResult; //запись с которой выводим
 
 
-        $query = $this->db->query("SELECT * FROM vvsu_posts ORDER BY id DESC LIMIT $curPost, $this->pageResult");
+        $query = $this->db->query("SELECT vvsu_posts.*, vvsu_users.login as `login` FROM vvsu_posts INNER JOIN vvsu_users ON vvsu_posts.uid = vvsu_users.id 
+                ORDER BY id DESC LIMIT $curPost, $this->pageResult");
         if(!$query || $this->db->num_rows($query) <=0) {
             return $this->core->dataConnect(VVSU_STYLE_PATH."modules/posts/no-post.html");
         }
@@ -96,6 +133,12 @@ class module
             'posts' => $this->getPosts($query),
             'pagination' => $this->getPagination($lastPage, $curPage),
         ];
+
+        foreach ($data['posts'] as $post) {
+            foreach ($post['tags'] as $val) {
+                echo $val;
+            }
+        }
 
 
         return $this->core->dataConnect(VVSU_STYLE_PATH."modules/posts/post.html", $data);

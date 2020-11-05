@@ -10,9 +10,17 @@
     </header>
     <p><? echo $post['text'] ?></p>
     <footer>
-        <em>Written by:</em> <strong>Author Name</strong>
-        <span class=newLine><em>Tags:</em> <a class=tags href=#>cool</a><a class=tags href=#>modern</a><a class=tags href=#>hype-friendly</a></span>
-        <a class=button href=#>Continue Reading</a>
+        <em>Written by:</em> <strong><? echo $post['author'] ?></strong>
+            <span class=newLine><em>Tags:</em>
+                <? if(!count($post['tags'])): ?>
+                    <a class=tags href=#>Список тегов пуст!</a>
+                <? else: ?>
+                <? foreach($post['tags'] as $tag): ?>
+                    <a class=tags href=#><? echo $tag ?></a>
+                <? endforeach ?>
+                <? endif ?>
+            </span>
+        <a class=button href="?page=post&id=<?echo $post['id']?>">Continue Reading</a>
     </footer>
 </article>
 <? endforeach ?>
