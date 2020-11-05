@@ -36,4 +36,22 @@ class core
 
         return ob_get_clean();
     }
+
+    public function dateConvert($month) {
+        $monthsList = array(
+            "01" => "янd",
+            "02" => "фев",
+            "03" => "мар",
+            "04" => "апр",
+            "05" => "мая",
+            "06" => "июня",
+            "07" => "июля",
+            "08" => "авг",
+            "09" => "сент",
+            "10" => "окт",
+            "11" => "нояб",
+            "12" => "дек"
+        );
+        return $monthsList[$month];
+    }
 }

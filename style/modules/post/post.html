@@ -1,0 +1,14 @@
+<article>
+    <header>
+        <div class=time>
+            <div class=year><? echo $data['year'] ?></div>
+            <div class=date><? echo $data['day'] ?><span><? echo $data['month'] ?></span></div>
+        </div>
+        <h1><? echo $data['title'] ?></h1>
+        <div class=comments><? echo $data['id'] ?></div>
+    </header>
+    <p><? echo $data['text'] ?></p>
+    <footer>
+        <em>Written by:</em> <strong><? echo $data['author'] ?></strong>
+    </footer>
+</article>
