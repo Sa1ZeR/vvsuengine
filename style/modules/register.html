@@ -1,18 +1,22 @@
 <div class="page-block">
     <div class="block-title">Регистрация</div>
-        <form method="post">
-            <div class="control-group"><input type="text" id="login" name="login" placeholder="Введите логин"/></div>
-            <div class="control-group"><input type="text" id="email" name="email" placeholder="Введите email"/></div>
-            <div class="control-group"><input type="password"  id="password" name="password" placeholder="Пароль" /></div>
-            <div class="control-group"><input type="password" id="passwordrepit" name="passwordrepit" placeholder="Повторите пароль" /></div>
             <div class="control-group">
-                <select id="gender">
+                <input class="login" type="text" id="login" name="login" placeholder="Введите логин"/>
+                <span class="exist-login" style="padding: 5px"></span>
+            </div>
+            <div class="control-group"><input type="text" class="email" id="email" name="email" placeholder="Введите email"/></div>
+            <div class="control-group"><input type="password" class="password"  id="password" name="password" placeholder="Пароль" /></div>
+            <div class="control-group"><input type="password" class="passwordrepit" id="passwordrepit" name="passwordrepit" placeholder="Повторите пароль" /></div>
+            <div class="control-group">
+                <select id="gender" class="gender">
                     <option value="0">Мужской</option>
                     <option value="1">Женский</option>
                 </select>
             </div>
             <div class="control-group">
-                <button type="submit" id="reg_btn" name="reg_btn" class="reg-btn">Зарегистрироваться</button>
+                <button type="submit" id="reg_btn" name="reg_btn" class="reg_btn">Зарегистрироваться</button>
             </div>
-        </form>
 </div>
+
+<script src="style/js/register/register.js"></script>
+<script src="style/js/register/main.js"></script>

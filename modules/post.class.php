@@ -17,7 +17,7 @@ class module {
             return $this->core->dataConnect(VVSU_STYLE_PATH.'modules/post/no-post.html');
         }
 
-        $query = $this->db->query("SELECT vvsu_posts.*, vvsu_users.login FROM vvsu_posts INNER JOIN vvsu_users ON vvsu_posts.uid = vvsu_users.id WHERE vvsu_posts.id = $postId");
+        $query = $this->db->query("SELECT vvsu_posts.*, vvsu_users.login FROM vvsu_posts INNER JOIN vvsu_users ON vvsu_posts.uid = vvsu_users.id WHERE vvsu_posts.id = '$postId'");
 
         if(!$query || $this->db->num_rows($query) <= 0) {
             return $this->core->dataConnect(VVSU_STYLE_PATH.'modules/post/no-post.html');

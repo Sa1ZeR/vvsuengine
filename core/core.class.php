@@ -54,4 +54,33 @@ class core
         );
         return $monthsList[$month];
     }
+
+    //1 - error 2 - success 3- warning
+    public function js_alert($header, $msg, $type) {
+
+        $msg_type = '';
+        switch ($type) {
+            case 1: $msg_type = "error";
+                break;
+            case 2: $msg_type = "success";
+                break;
+            case 3: $msg_type = "warning";
+                break;
+            default: $msg_type = "question";
+        }
+
+        echo "<script> Swal.fire(
+          '$header',
+          '$msg',
+          '$msg_type'
+        ) </script>";
+
+        exit();
+    }
 }
+
+/*
+ * '$header',
+          '$msg',
+          '$msg_type'
+ */

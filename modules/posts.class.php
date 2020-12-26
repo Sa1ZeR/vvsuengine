@@ -13,7 +13,7 @@ class module
 
     private function getTags($id) {
         $id = intval($id);
-        $query = $this->db->query("SELECT * from vvsu_tags WHERE id IN (SELECT tid from vvsu_post_to_tag WHERE pid = $id)");
+        $query = $this->db->query("SELECT * from vvsu_tags WHERE id IN (SELECT tid from vvsu_post_to_tag WHERE pid = '$id')");
 
         $tags = [];
 
@@ -99,14 +99,14 @@ class module
 
         $lastPage = ceil( mysqli_fetch_row($count)[0] / $this->pageResult);
 
-
         $curPost = $curPage * $this->pageResult - $this->pageResult; //запись с которой выводим
-
 
         $query = $this->db->query("SELECT vvsu_posts.*, vvsu_users.login FROM vvsu_posts INNER JOIN vvsu_users ON vvsu_posts.uid = vvsu_users.id 
                 ORDER BY id DESC LIMIT $curPost, $this->pageResult");
 
         if(!$query || $this->db->num_rows($query) <=0) {
+            echo $curPost;
+            echo $this->pageResult;
             return $this->core->dataConnect(VVSU_STYLE_PATH."modules/posts/no-post.html");
         }
 
@@ -114,13 +114,6 @@ class module
             'posts' => $this->getPosts($query),
             'pagination' => $this->getPagination($lastPage, $curPage),
         ];
-
-        foreach ($data['posts'] as $post) {
-            foreach ($post['tags'] as $val) {
-                echo $val;
-            }
-        }
-
 
         return $this->core->dataConnect(VVSU_STYLE_PATH."modules/posts/post.html", $data);
     }
