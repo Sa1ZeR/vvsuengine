@@ -5,11 +5,15 @@ class core
 {
 
     public $db;
+    public $user;
 
     public function __construct()
     {
         require_once (VVSU_CORE_PATH."db.class.php");
+        require_once (VVSU_CORE_PATH."user.class.php");
         $this->db = new db($this);
+        session_start();
+        $this->user = new user($this);
     }
 
     public function loadModule($page) {
@@ -26,6 +30,28 @@ class core
         }
 
         return $module->content();
+    }
+
+    public function load_blocks() {
+        $content = '';
+
+        $blocks = scandir(VVSU_BLOCK_PATH);
+        foreach ($blocks as $key => $file) {
+            if(substr($file, -4) != '.php') continue;
+            include VVSU_BLOCK_PATH.$file;
+            $class = "block_".substr($file, 0, -4);
+            if(!class_exists($class)) {
+                continue;
+            }
+            $b = new $class($this);
+            if(!method_exists($b,"content" )) {
+                unset($b);
+                continue;
+            }
+            $content = $content. $b->content();
+        }
+
+        return $content;
     }
 
 
@@ -63,6 +89,9 @@ class core
             case 1: $msg_type = "error";
                 break;
             case 2: $msg_type = "success";
+                echo "<script> setTimeout(function(){
+					location.search=\"\";
+				}, 5000); </script>";
                 break;
             case 3: $msg_type = "warning";
                 break;

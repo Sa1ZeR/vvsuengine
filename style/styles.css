@@ -452,6 +452,27 @@ aside nav, aside section {
 }
 aside section:last-child { margin-bottom: 0 }
 
+.profile-menu-btn {
+	padding: 17px;
+}
+ul.profile-info {
+	padding: 13px;
+	font-size: large;
+}
+
+.small-btn {
+	background-color: #970000;
+	/* background-color: #b90a10; */
+	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #ca0000), color-stop(1, #970000));
+	padding: 9px;
+	border-radius: 50px;
+	color: white;
+	margin: 3px;
+	font-size: small;
+	-webkit-border-radius: 20px;
+	text-decoration: none;
+}
+
 #inTouch li {
 	display: block;
 	background: #fff;
@@ -607,3 +628,4 @@ footer section:first-child { margin-left: 0 }
 	margin: 10px 0 30px;
 	clear: both;
 }
+

@@ -3,11 +3,12 @@
 
 class module {
 
-    private $core, $db;
+    private $core, $db, $user;
 
     public function __construct($core) {
         $this->core = $core;
         $this->db = $core->db;
+        $this->user = $core->user;
     }
 
     private function existLogin() {
@@ -22,8 +23,9 @@ class module {
     }
 
     private function verify() {
-        //todo check user auth
-
+        if($this->user->isAuth()) {
+            return $this->core->js_alert("Ошибка!", "Вы уже авторизованы!", 1);;
+        }
         $login = $this->db->safesql(@$_POST['login']);
         $email = $this->db->safesql(@$_POST['email']);
         $pass = @$_POST['password'];
@@ -70,7 +72,9 @@ class module {
     }
 
     public function content() {
-
+        if($this->user->isAuth()) {
+            header('Location: /');
+        }
         $content = $this->main();
 
         if($_SERVER['REQUEST_METHOD'] == 'POST') {

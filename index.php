@@ -1,7 +1,6 @@
 <?php
 
 require_once ('./system.php');
-echo $core->dataConnect(VVSU_STYLE_PATH."header.html");
 
 $page = isset($_GET['page']) ? $_GET['page'] : "mainpage";
 
@@ -17,8 +16,9 @@ switch ($page) {
 
 $dataGlobal = array(
     "content" => $content,
-    "l_blocks" => $core->dataConnect(VVSU_STYLE_PATH."blocks/menu.html")
+    //"l_blocks" => $core->dataConnect(VVSU_STYLE_PATH."blocks/menu.html")
+    "l_blocks" => $core->load_blocks()
 );
-
+echo $core->dataConnect(VVSU_STYLE_PATH."header.html");
 echo $core->dataConnect(VVSU_STYLE_PATH.'index.html', $dataGlobal);
 ?>

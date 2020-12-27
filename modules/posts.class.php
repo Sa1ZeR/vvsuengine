@@ -105,8 +105,6 @@ class module
                 ORDER BY id DESC LIMIT $curPost, $this->pageResult");
 
         if(!$query || $this->db->num_rows($query) <=0) {
-            echo $curPost;
-            echo $this->pageResult;
             return $this->core->dataConnect(VVSU_STYLE_PATH."modules/posts/no-post.html");
         }
 
