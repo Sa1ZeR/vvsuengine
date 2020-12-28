@@ -3,10 +3,11 @@
 
 class module
 {
-    private $core, $db, $pageResult;
+    private $core, $db, $pageResult, $user;
 
     public function __construct($core) {
         $this->core = $core;
+        $this->user = $core->user;
         $this->db = $core->db;
         $this->pageResult = 5;
     }
@@ -42,6 +43,7 @@ class module
                 'tid' => intval($arr['tid']),
                 'tags' => [],
                 'author' => $this->db->HSC($arr['login']),
+                'may_remove' => $this->user->isAdmin ? 1 : $this->db->HSC($arr['login'] == $this->user->login) ? 1 : 0,
             ];
         }
 
@@ -89,6 +91,7 @@ class module
     }
 
     public function content() {
+        $this->user->update();
         $curPage = isset($_GET['pid']) ? intval($_GET['pid']) : 1;
 
         $count = $this->db->query("SELECT count(*) FROM vvsu_posts");

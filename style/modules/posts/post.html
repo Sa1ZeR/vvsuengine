@@ -1,5 +1,5 @@
 <? foreach ($data['posts'] as $post): ?>
-<article>
+<article class="post_id">
     <header>
         <div class=time>
             <div class=year><? echo $post['year'] ?></div>
@@ -21,7 +21,16 @@
                 <? endif ?>
             </span>
         <a class=button href="?page=post&id=<?echo $post['id']?>">Continue Reading</a>
+        <?php
+            if($post['may_remove']) {
+            ?>
+                <a class="button remove_post" href="?page=post_remove&id=<?echo $post['id']?>">Удалить</a>
+        <?php
+            }
+        ?>
     </footer>
 </article>
 <? endforeach ?>
 <? echo $data['pagination'] ?>
+
+<script src="style/js/remove_post.js"></script>
