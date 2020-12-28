@@ -9,7 +9,7 @@ class module
         $this->core = $core;
         $this->user = $core->user;
         $this->db = $core->db;
-        $this->pageResult = 5;
+        $this->pageResult = $this->user->pageResult;
     }
 
     private function getTags($id) {
@@ -94,13 +94,13 @@ class module
         $this->user->update();
         $curPage = isset($_GET['pid']) ? intval($_GET['pid']) : 1;
 
-        $count = $this->db->query("SELECT count(*) FROM vvsu_posts");
+        $count = $this->db->query("SELECT * FROM vvsu_posts");
 
         if(!$count || $this->db->num_rows($count) <= 0) {
             return $this->core->dataConnect(VVSU_STYLE_PATH."modules/posts/no-post.html");
         }
 
-        $lastPage = ceil( mysqli_fetch_row($count)[0] / $this->pageResult);
+        $lastPage = ceil( $this->db->num_rows($count) / $this->pageResult);
 
         $curPost = $curPage * $this->pageResult - $this->pageResult; //запись с которой выводим
 

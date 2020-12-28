@@ -7,6 +7,7 @@ class user
     private $core;
     private $db;
 
+    public $id;
     public $login;
     public $pageResult; //result on page
     public $postCount;
@@ -37,6 +38,8 @@ class user
 
     public function logout() {
         unset($_SESSION['user']);
+        setcookie('login','',time()-3600);
+        setcookie('user-session','',time()-3600);
     }
 
     public function update() {
@@ -45,6 +48,7 @@ class user
             return false;
         }
         $arr = $this->db->fetch_assoc($query);
+        $this->id= $arr['id'];
         $this->login = $arr['login'];
         $this->postCount = $arr['posts'];
         $this->pageResult = $arr['posts_on_page'];
@@ -55,6 +59,7 @@ class user
 
     public function auth($arr) {
         $this->login = $arr['login'];
+        $this->id = $arr['id'];
         $_SESSION['user'] = [
             'id' => $arr['id'],
             'login' => $arr['login'],

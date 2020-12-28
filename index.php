@@ -19,6 +19,7 @@ $dataGlobal = array(
     //"l_blocks" => $core->dataConnect(VVSU_STYLE_PATH."blocks/menu.html")
     "l_blocks" => $core->load_blocks()
 );
+
 echo $core->dataConnect(VVSU_STYLE_PATH."header.html");
 echo $core->dataConnect(VVSU_STYLE_PATH.'index.html', $dataGlobal);
 ?>

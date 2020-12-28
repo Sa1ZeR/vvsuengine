@@ -4,13 +4,12 @@
 class module
 {
 
-    private $core, $db, $pageResult, $user;
+    private $core, $db, $user;
 
     public function __construct($core) {
         $this->core = $core;
         $this->user = $core->user;
         $this->db = $core->db;
-        $this->pageResult = 5;
     }
 
     public function content()

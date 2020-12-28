@@ -18,12 +18,13 @@ class module
         }
         $login = $this->db->safesql($_POST['login']);
         $pass = $_POST['password'];
-        $pass = password_hash($pass, PASSWORD_BCRYPT);
-        $query = $this->db->query("SELECT * FROM vvsu_users WHERE login = '$login'");
+        $pass = md5($pass);
+        $query = $this->db->query("SELECT * FROM vvsu_users WHERE login = '$login' and password = '$pass'");
         if(!$query || $this->db->num_rows($query) <= 0) {
-            //alert
+            return $this->core->notify('Ошибка', 'Пользователь не найден', 1);
         }
         $this->user->auth($this->db->fetch_assoc($query));
+        return $this->core->notify('Успешно', 'Вы авторизовались', 2);
     }
 
 }

@@ -46,7 +46,7 @@ class module {
             return $this->core->js_alert("Ошибка!", "Пароли не совпадают!", 1);
         }
 
-        $pass = password_hash($pass, PASSWORD_BCRYPT);
+        $pass = md5($pass);
 
         $ip = $_SERVER['REMOTE_ADDR'];
 

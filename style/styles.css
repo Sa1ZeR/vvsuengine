@@ -629,3 +629,13 @@ footer section:first-child { margin-left: 0 }
 	clear: both;
 }
 
+textarea {
+	resize: none;
+	width: 550px;
+	height: 155px;
+}
+
+.alert-block {
+	font-size: medium;
+}
+

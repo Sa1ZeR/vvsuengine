@@ -44,11 +44,11 @@ class core
                 continue;
             }
             $b = new $class($this);
-            if(!method_exists($b,"content" )) {
+            if(!method_exists($b,"content")) {
                 unset($b);
                 continue;
             }
-            $content = $content. $b->content();
+            $content = $content.$b->content();
         }
 
         return $content;
@@ -105,6 +105,15 @@ class core
         ) </script>";
 
         exit();
+    }
+
+    //1 - error 2 - success 3- warning
+    public function notify($header, $msg, $type, $url ='/') {
+        $_SESSION['notify']['header'] = $header;
+        $_SESSION['notify']['msg'] = $msg;
+        $_SESSION['notify']['type'] = $type;
+
+        header("Location: ".$url);
     }
 }
 
